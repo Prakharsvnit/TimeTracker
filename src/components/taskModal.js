@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Box,
   TextField,
@@ -7,14 +8,22 @@ import {
   Typography,
   Paper,
 } from "@mui/material";
+import { updateTaskTitle, updateTaskDescription } from "../redux/contestSlice";
 import "../css/taskModal.css";
 
 const TaskModal = ({ openModal, setOpenModal }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setOpenModal(false);
+  };
+
+  const handleSaveTask = () => {
+    setOpenModal(false);
+    dispatch(updateTaskTitle(title));
+    dispatch(updateTaskDescription(description));
   };
 
   return (
@@ -43,7 +52,12 @@ const TaskModal = ({ openModal, setOpenModal }) => {
             rows={4}
           />
           <Box className="form-btn">
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              onClick={handleSaveTask}
+              type="submit"
+              variant="contained"
+              color="primary"
+            >
               Save
             </Button>
             <Button
