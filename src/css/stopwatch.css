@@ -1,0 +1,13 @@
+.timer{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size:30px;
+}
+
+.stopwatch{
+    display: flex;
+    justify-content: center;
+    column-gap:30px;
+}
+
