@@ -1,7 +1,5 @@
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateTimeDuration } from "../redux/contestSlice";
 import "../css/stopwatch.css";
 import TaskModal from "./taskModal";
 
@@ -10,7 +8,6 @@ const Stopwatch = () => {
   const [pause, setPause] = useState(false);
   const [time, setTime] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     let intervalId;
@@ -48,7 +45,6 @@ const Stopwatch = () => {
   const handleOpenModal = () => {
     setStart(false);
     setOpenModal(true);
-    dispatch(updateTimeDuration(timeFormat()));
   };
 
   return (
