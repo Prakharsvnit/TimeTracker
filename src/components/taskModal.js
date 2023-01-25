@@ -8,9 +8,12 @@ import {
   Paper,
 } from "@mui/material";
 import "../css/taskModal.css";
+import { useState } from "react";
 import { addContest } from "../redux/actions";
 
-const TaskModal = ({ openModal, setOpenModal }) => {
+const TaskModal = ({ duration, openModal, setOpenModal }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = (event) => {
@@ -22,13 +25,7 @@ const TaskModal = ({ openModal, setOpenModal }) => {
     setOpenModal(false);
   };
 
-  const handleTitleChange = (event) => {
-    dispatch(addContest(event.target.value));
-  };
-
-  const handleDescriptionChange = (event) => {
-    dispatch(addContest(event.target.value));
-  };
+  dispatch(addContest({ title, description, duration }));
 
   return (
     <Modal open={openModal} onClose={handleCloseModal}>
@@ -44,7 +41,7 @@ const TaskModal = ({ openModal, setOpenModal }) => {
             name="title"
             label="Title"
             margin="normal"
-            onChange={handleTitleChange}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             required
@@ -54,7 +51,7 @@ const TaskModal = ({ openModal, setOpenModal }) => {
             label="Description"
             margin="normal"
             multiline
-            onChange={handleDescriptionChange}
+            onChange={(e) => setDescription(e.target.value)}
             rows={4}
           />
           <Box className="form-btn">

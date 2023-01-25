@@ -1,9 +1,7 @@
 import { Box, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import "../css/stopwatch.css";
 import TaskModal from "./taskModal";
-import { addContest } from "../redux/actions";
 
 const Stopwatch = () => {
   const [start, setStart] = useState(false);
@@ -11,7 +9,6 @@ const Stopwatch = () => {
   const [reset, setReset] = useState(false);
   const [time, setTime] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     let intervalId;
@@ -60,7 +57,6 @@ const Stopwatch = () => {
   const handleOpenModal = () => {
     setStart(false);
     setOpenModal(true);
-    dispatch(addContest(duration));
   };
 
   return (
@@ -80,7 +76,11 @@ const Stopwatch = () => {
           Save
         </Button>
       </Box>
-      <TaskModal openModal={openModal} setOpenModal={setOpenModal} />
+      <TaskModal
+        duration={duration}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      />
     </>
   );
 };

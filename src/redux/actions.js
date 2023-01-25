@@ -1,38 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  title: "",
-  description: "",
-  timer: "",
-};
+const initialState = [];
 
 export const contestSlice = createSlice({
   name: "contest",
   initialState,
   reducers: {
     addContest: (state, action) => {
-      return {
-        ...state,
-        contest: [...state.contest, action.payload],
-      };
+      state.push(action.payload);
     },
   },
 });
 
 export const { addContest } = contestSlice.actions;
 export default contestSlice.reducer;
-
-/*
-initialState = {}
-reducers:
-    addContest: return {
-        ...state,
-        contest:[...state.contest,action.payload],
-    }
-
-    
-  
-   
-   todos: [...state.todos, action.payload] //new todos array 
-  }
-*/

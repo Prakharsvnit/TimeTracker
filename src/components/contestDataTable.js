@@ -9,15 +9,10 @@ import {
   TableContainer,
 } from "@mui/material";
 import "../css/dataTable.css";
+import { useSelector } from "react-redux";
 
 const ContestDataDisplay = () => {
-  //   const Time = useSelector((state) => state.contest.timeDuration);
-  //   const Title = useSelector((state) => state.contest.title);
-  //   const Description = useSelector((state) => state.contest.description);
-
-  //   console.log(Time, "Time");
-  //   console.log(Title, "Title");
-  //   console.log(Description, "Description");
+  const contestData = useSelector((state) => state.contest);
 
   return (
     <>
@@ -34,13 +29,15 @@ const ContestDataDisplay = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                1
-              </TableCell>
-              <TableCell align="left">2</TableCell>
-              <TableCell align="left">3</TableCell>
-            </TableRow>
+            {contestData.map((data) => (
+              <TableRow>
+                <TableCell component="th" scope="row">
+                  {data.duration}
+                </TableCell>
+                <TableCell align="left">{data.title}</TableCell>
+                <TableCell align="left">{data.description}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
