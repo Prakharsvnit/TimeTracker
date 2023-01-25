@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Box,
   TextField,
@@ -8,51 +8,57 @@ import {
   Paper,
 } from "@mui/material";
 import "../css/taskModal.css";
+import { addContest } from "../redux/actions";
 
 const TaskModal = ({ openModal, setOpenModal }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOpenModal(false);
+  };
 
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  const handleSaveTask = () => {
-    setOpenModal(false);
+  const handleTitleChange = (event) => {
+    dispatch(addContest(event.target.value));
+  };
+
+  const handleDescriptionChange = (event) => {
+    dispatch(addContest(event.target.value));
   };
 
   return (
     <Modal open={openModal} onClose={handleCloseModal}>
       <Paper elevation={3} className="task-modal">
-        <Typography align="center" variant="h4" contained>
+        <Typography align="center" variant="h4">
           Tasks
         </Typography>
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={handleSubmit}>
           <TextField
             required
             fullWidth
+            type="text"
+            name="title"
             label="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
             margin="normal"
+            onChange={handleTitleChange}
           />
           <TextField
             required
             fullWidth
+            type="text"
+            name="description"
             label="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
             margin="normal"
             multiline
+            onChange={handleDescriptionChange}
             rows={4}
           />
           <Box className="form-btn">
-            <Button
-              onClick={handleSaveTask}
-              type="submit"
-              variant="contained"
-              color="primary"
-            >
+            <Button type="submit" variant="contained" color="primary">
               Save
             </Button>
             <Button
