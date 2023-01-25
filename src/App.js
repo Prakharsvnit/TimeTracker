@@ -1,5 +1,5 @@
 import { Container } from "@mui/material";
-import ContestDataDisplay from "./components/contestDataDisplay";
+import ContestDataTable from "./components/contestDataTable";
 import Header from "./components/header";
 import Stopwatch from "./components/stopwatch";
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
       <Container maxWidth="xl">
         <Header />
         <Stopwatch />
-        <ContestDataDisplay />
+        <ContestDataTable />
       </Container>
     </>
   );
