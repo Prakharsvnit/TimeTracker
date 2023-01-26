@@ -16,26 +16,51 @@ const ContestDataDisplay = () => {
 
   return (
     <>
-      <Typography variant="h4" align="center">
+      <Typography variant="h4" sx={{ mb: 3 }} align="center">
         Tasks
       </Typography>
-      <TableContainer className="contest-data-container" component={Paper}>
+      <TableContainer
+        sx={{ width: 500, m: "auto", border: 1 }}
+        component={Paper}
+      >
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Time</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
+              <TableCell
+                sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
+              >
+                Time
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
+              >
+                Title
+              </TableCell>
+              <TableCell
+                sx={{ fontSize: 25, fontWeight: 500, textAlign: "center" }}
+              >
+                Description
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {contestData.map((data) => (
-              <TableRow>
-                <TableCell component="th" scope="row">
+              <TableRow sx={{ fontWeight: "bold" }}>
+                <TableCell
+                  sx={{ fontSize: 20, fontWeight: 500, textAlign: "center" }}
+                >
                   {data.duration}
                 </TableCell>
-                <TableCell align="left">{data.title}</TableCell>
-                <TableCell align="left">{data.description}</TableCell>
+                <TableCell
+                  sx={{ fontSize: 20, fontWeight: 500, textAlign: "center" }}
+                >
+                  {data.title}
+                </TableCell>
+                <TableCell
+                  sx={{ fontSize: 20, fontWeight: 500, textAlign: "center" }}
+                >
+                  {data.description}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
