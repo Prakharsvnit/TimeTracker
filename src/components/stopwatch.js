@@ -6,7 +6,6 @@ import TaskModal from "./taskModal";
 const Stopwatch = () => {
   const [start, setStart] = useState(false);
   const [pause, setPause] = useState(false);
-  const [reset, setReset] = useState(false);
   const [time, setTime] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [duration, setDuration] = useState("");
@@ -37,24 +36,20 @@ const Stopwatch = () => {
   const startBtn = () => {
     setPause(false);
     setStart(!start);
-    setReset(true);
   };
 
   const pauseBtn = () => {
     setStart(false);
     setPause(!pause);
-    setReset(false);
   };
 
   const resetBtn = () => {
     setTime(0);
     setPause(true);
-    setReset(!reset);
     setStart(false);
   };
 
   const handleOpenModal = () => {
-    setStart(false);
     setOpenModal(true);
     setDuration(timeFormat());
   };
@@ -69,11 +64,11 @@ const Stopwatch = () => {
         <Button variant="contained" disabled={pause} onClick={pauseBtn}>
           Pause
         </Button>
-        <Button variant="contained" disabled={reset} onClick={resetBtn}>
-          Reset
-        </Button>
         <Button variant="contained" onClick={handleOpenModal}>
           Save
+        </Button>
+        <Button variant="contained" onClick={resetBtn}>
+          Reset
         </Button>
       </Box>
       <TaskModal
