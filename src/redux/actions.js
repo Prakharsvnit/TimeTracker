@@ -7,7 +7,7 @@ export const contestSlice = createSlice({
   initialState,
   reducers: {
     addContest: (state, action) => {
-      state.push(action.payload);
+      state.push(Object.assign({}, action.payload));
     },
   },
 });

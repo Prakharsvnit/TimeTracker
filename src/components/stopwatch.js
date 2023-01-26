@@ -9,6 +9,7 @@ const Stopwatch = () => {
   const [reset, setReset] = useState(false);
   const [time, setTime] = useState(0);
   const [openModal, setOpenModal] = useState(false);
+  const [duration, setDuration] = useState("");
 
   useEffect(() => {
     let intervalId;
@@ -33,8 +34,6 @@ const Stopwatch = () => {
     return stopwatchTime;
   };
 
-  const duration = timeFormat();
-
   const startBtn = () => {
     setPause(false);
     setStart(!start);
@@ -57,11 +56,12 @@ const Stopwatch = () => {
   const handleOpenModal = () => {
     setStart(false);
     setOpenModal(true);
+    setDuration(timeFormat());
   };
 
   return (
     <>
-      <time className="timer">{duration}</time>;
+      <time className="timer">{timeFormat()}</time>;
       <Box className="stopwatch">
         <Button variant="contained" disabled={start} onClick={startBtn}>
           Start

@@ -12,20 +12,31 @@ import { useState } from "react";
 import { addContest } from "../redux/actions";
 
 const TaskModal = ({ duration, openModal, setOpenModal }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
+  const initModalData = Object.freeze({
+    title: "",
+    description: "",
+    duration: "",
+  });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setOpenModal(false);
-  };
+  const [formData, updateFormData] = useState(initModalData);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  dispatch(addContest({ title, description, duration }));
+  const handleSaveData = () => {
+    dispatch(addContest(formData));
+    setOpenModal(false);
+  };
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      duration: duration,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
 
   return (
     <Modal open={openModal} onClose={handleCloseModal}>
@@ -33,29 +44,31 @@ const TaskModal = ({ duration, openModal, setOpenModal }) => {
         <Typography align="center" variant="h4">
           Tasks
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <TextField
             required
             fullWidth
-            type="text"
+            label="Name"
             name="title"
-            label="Title"
+            onChange={handleChange}
             margin="normal"
-            onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             required
             fullWidth
-            type="text"
-            name="description"
             label="Description"
+            name="description"
+            onChange={handleChange}
             margin="normal"
             multiline
-            onChange={(e) => setDescription(e.target.value)}
             rows={4}
           />
           <Box className="form-btn">
-            <Button type="submit" variant="contained" color="primary">
+            <Button
+              onClick={handleSaveData}
+              variant="contained"
+              color="primary"
+            >
               Save
             </Button>
             <Button
